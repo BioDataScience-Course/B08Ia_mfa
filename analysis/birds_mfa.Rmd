@@ -14,7 +14,7 @@ source("../R/carto.R")
 ```
 
 <!--- Consignes
-Si cela est nécessaire, ajoutez d'autres scripts comprennant des fonctions utiles.
+Si cela est nécessaire, ajoutez d'autres scripts comprenant des fonctions utiles.
 --->
 
 
@@ -30,7 +30,7 @@ read("../data/atlas_map.rds") %>.%
   geom_sf_text(size = 2) +
   ggsn::blank() 
 ```
-Des relevés de température et de précipitations ont été réalisée dans chaque station. 
+Des relevés de températures et de précipitations ont été réalisée dans chaque station. 
 
 # Analyse
 
@@ -57,7 +57,7 @@ Réalisez un graphique pertinent pour mettre en avant les corrélations linéair
 <!--- Consignes
 Importez le tableau de données atlas_birds.csv. Ce tableau comprend des informations sur le recensement d'oiseaux. 
 
-Astuces : Les mesures ne sont pas des dénombrements simple. Les valeurs varient entre 0 et 4. 0 étant l'absence de l'espèce et 4 présence accrue de l'espèce.
+Astuces : Les mesures ne sont pas des dénombrements simples. Les valeurs varient entre 0 et 4. 0 étant l'absence de l'espèce et 4 présence accrue de l'espèce.
 --->
 
 ```{r birds}
