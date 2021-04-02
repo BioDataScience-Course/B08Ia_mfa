@@ -2,7 +2,7 @@
 
 ## Avant-propos
 
-Il est possible que ce document évolue au cours du temps. N'hésitez pas à vérifier le lien suivant afin de voir les modifications dans les consignes : <https://github.com/BioDataScience-Course/sdd2_module08>
+Il est possible que ce document évolue au cours du temps. N'hésitez pas à vérifier le lien suivant afin de voir les modifications dans les consignes : <https://github.com/BioDataScience-Course/B08Ia_mfa>
 
 ## Avant-propos
 
@@ -20,8 +20,8 @@ Ce projet est individuel et cadré. Il doit être terminé pour la fin du module
 
 ## Consignes
 
-- Complétez le fichier birds_mfa.Rmd afin de réaliser une AFM.
+- Complétez le fichier `birds_mfa.Rmd` afin de réaliser une AFM.
 
-- Complétez le fichier open_data.Rmd afin de réaliser une critique d'un plan d'expérience selon le principe *FAIR*.
+- Complétez le fichier `open_data.Rmd` afin de réaliser une critique d'un plan d'expérience selon le principe *FAIR*.
 
 N'hésitez pas à ajouter un ou plusieurs scripts R dans le sous dossier R et à sourcer ces fonctions dans vos documents R Markdown pour réaliser vos analyses (pour obtenir le code à partir du cours, vous devrez peut-être dérouler des sections intitulées "voir le code" !)
