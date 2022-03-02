@@ -1,0 +1,129 @@
+---
+title: "Oiseaux des Alpes françaises"
+author: "___"
+date: "___"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+SciViews::R
+
+# Chargement de fonction supplémentaires
+source("../R/carto.R")
+```
+
+<!--% Si cela est nécessaire, ajoutez d'autres scripts comprenant des fonctions utiles dans le chunk de setup ci-dessus. -->
+
+
+# Introduction
+
+Des scientifiques ont étudié 19 espèces d'oiseaux dans 23 régions des Alpes françaises. La carte ci-dessous présente les régions étudiées.
+
+<!--# Vous ne devez pas comprendre ce code... vous apprendrez à réaliser des cartes avec R dans le cours de Science des Données III l'an prochain). -->
+
+```{r}
+read("../data/alpes_map.rds") %>.%
+  sf::st_as_sf(.) %>.%
+  chart(., ~ 0 %label=% names) +
+  geom_sf() +
+  geom_sf_text(size = 2) +
+  ggsn::blank() 
+```
+
+Des relevés de températures et de précipitations ont été réalisé également dans chaque station.
+
+
+# Analyse
+
+## Météo
+
+<!--% Importez le tableau de données `data/alpes_meteo.csv`. Ce tableau contient les valeurs minimales et maximales de températures en janvier et en juillet pour chaque station. Il contient aussi des informations sur les précipitations en ces stations. -->
+
+```{r meteo}
+meteo <- ___
+```
+
+<!--% Réalisez un graphique pertinent pour mettre en avant les corrélations linéaires entre les variables de ce tableau. Décrivez ce graphique en maximum 3 phrases. -->
+
+```{r meteoplot}
+
+```
+
+<!--% Description du graphique meteoplot ci-dessous. -->
+
+
+## Recensement des oiseaux
+
+<!--% Importez le tableau de données `docs/alpes_birds.csv`. Ce tableau présente le dénombrement de plusieurs espèces d'oiseaux aux différentes stations. Astuces : Vous noterez que es mesures ne sont pas les dénombrements eux-mêmes, mais des valeurs comprises entre 0 et 4. Le niveau 0 correspond à l'absence de l'espèce et le niveau 4 est synonyme d'abondance maximale de l'espèce dans la zone étudiée. -->
+
+```{r birds}
+birds <- ___
+```
+
+<!--% Réalisez un graphique pertinent pour mettre en avant la distribution des espèces dans les différentes stations. Ce graphique doit être adapté en tenant compte de ce qu'il s'agit ici de données qualitatives. Décrivez ce graphique en maximum 3 phrases. -->
+
+```{r birdsplot}
+
+```
+
+<!--% Description du graphique ci-dessous. -->
+
+
+## Analyse factorielle multiple
+
+<!--% Combinez vos deux tableaux `meteo` et `birds` en un seul que vous nommerez `alpes`.
+--->
+
+```{r bind}
+alpes <- ___
+```
+
+<!--% Réalisez votre AFM dans l'objet `aples_mfa` et résulez-le ensuite. Décrivez ce que vous obtenez en 2 à 3 phrases maximum. -->
+
+```{r mfa}
+alpes_mfa <- mfa(___)
+summary(alpes_mfa)
+```
+
+
+<!--% Réalisez le graphique des éboulis et interprétez-le en 2 phrases maximum. -->
+
+```{r mfa_scree}
+
+```
+
+<!--% Interprétation du graphique ci-dessous. -->
+
+
+<!--% Réalisez le graphique de la répartition des variables dans l'espace et interprétez-le en 5 phrases maximum. -->
+
+```{r mfa_loadings}
+
+```
+
+<!--% Interprétation du graphique ci-dessous. -->
+
+
+<!--% Créez le graphique de la répartition des composantes principales dans l'espace. Décrivez ce que vous y observez en 3 phrases maximum. -->
+
+```{r mfa_axes}
+
+```
+
+<!--% Interprétation du graphique ci-dessous. -->
+
+
+<!--% produisez maintenant le graphique de la répartition des individus dans l'espace et analysez-le en 3 phrases maximum. -->
+
+```{r mfa_individus}
+
+```
+
+<!--% Interprétation du graphique ci-dessous. -->
+
+
+# Discussion
+
+<!--% Sur base de la série de graphiques que vous venez de réaliser, synthétisez vos observations et discutez-les en maximum 5 phrases. -->
+
