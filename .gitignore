@@ -46,3 +46,12 @@ docs/*.html
 docs/*.nb.html
 docs/*.pdf
 docs/*_files/
+
+# Mac files
+*DS_Store
+
+# core.***
+*core.****
+
+# Test file
+test/**

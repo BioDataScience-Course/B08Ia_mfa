@@ -7,18 +7,12 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-SciViews::R
-
-# Chargement de fonction supplémentaires
-source("../R/carto.R")
+SciViews::R("spatial", "explore")
 ```
-
-<!--% Si cela est nécessaire, ajoutez d'autres scripts comprenant des fonctions utiles dans le chunk de setup ci-dessus. -->
-
 
 # Introduction
 
-Des scientifiques ont étudié 19 espèces d'oiseaux dans 23 régions des Alpes françaises. La carte ci-dessous présente les régions étudiées.
+Des scientifiques ont étudié 19 espèces d'oiseaux dans 23 régions des Alpes françaises. Des relevés de températures et de précipitations ont été réalisé également dans chaque station. La carte ci-dessous présente les régions étudiées.
 
 <!--# Vous ne devez pas comprendre ce code... vous apprendrez à réaliser des cartes avec R dans le cours de Science des Données III l'an prochain). -->
 
@@ -31,9 +25,6 @@ read("../data/alpes_map.rds") %>.%
   ggsn::blank() 
 ```
 
-Des relevés de températures et de précipitations ont été réalisé également dans chaque station.
-
-
 # Analyse
 
 ## Météo
@@ -44,14 +35,13 @@ Des relevés de températures et de précipitations ont été réalisé égaleme
 meteo <- ___
 ```
 
-<!--% Réalisez un graphique pertinent pour mettre en avant les corrélations linéaires entre les variables de ce tableau. Décrivez ce graphique en maximum 3 phrases. -->
+<!--% Réalisez un graphique mettant en avant les corrélations linéaires entre les variables de `meteo`. -->
 
 ```{r meteoplot}
 
 ```
 
-<!--% Description du graphique meteoplot ci-dessous. -->
-
+<!--% Interprétez le graphique en 3 phrases. -->
 
 ## Recensement des oiseaux
 
@@ -67,63 +57,62 @@ birds <- ___
 
 ```
 
-<!--% Description du graphique ci-dessous. -->
-
+<!--% Interprétez le graphique en 3 phrases. -->
 
 ## Analyse factorielle multiple
 
-<!--% Combinez vos deux tableaux `meteo` et `birds` en un seul que vous nommerez `alpes`.
---->
+<!--% Combinez vos deux tableaux `meteo` et `birds` en un seul que vous nommerez `alpes`.-->
 
 ```{r bind}
-alpes <- ___
+
 ```
 
-<!--% Réalisez votre AFM dans l'objet `aples_mfa` et résulez-le ensuite. Décrivez ce que vous obtenez en 2 à 3 phrases maximum. -->
+<!--% Réalisez votre AFM dans l'objet `aples_mfa` et résumez-le ensuite. -->
 
 ```{r mfa}
-alpes_mfa <- mfa(___)
-summary(alpes_mfa)
+
 ```
 
-
-<!--% Réalisez le graphique des éboulis et interprétez-le en 2 phrases maximum. -->
+<!--% Réalisez le graphique des éboulis.-->
 
 ```{r mfa_scree}
 
 ```
 
-<!--% Interprétation du graphique ci-dessous. -->
+<!--% Interprétez le graphique des éboulis et le résumé du modèle en 4 phrases maximum. -->
 
-
-<!--% Réalisez le graphique de la répartition des variables dans l'espace et interprétez-le en 5 phrases maximum. -->
+<!--% Réalisez le graphique de la répartition des variables dans l'espace. -->
 
 ```{r mfa_loadings}
 
 ```
 
-<!--% Interprétation du graphique ci-dessous. -->
+<!--% Interprétez le graphique ci-dessus en 2 phrases maximum. -->
 
-
-<!--% Créez le graphique de la répartition des composantes principales dans l'espace. Décrivez ce que vous y observez en 3 phrases maximum. -->
+<!--% Réalisez le graphique de la répartition des composantes principales dans l'espace. -->
 
 ```{r mfa_axes}
 
 ```
 
-<!--% Interprétation du graphique ci-dessous. -->
+<!--% Interprétez le graphique ci-dessus en 2 phrases. -->
 
+<!--% Réalisez le graphique de la répartition des groupes dans l'espace. -->
 
-<!--% produisez maintenant le graphique de la répartition des individus dans l'espace et analysez-le en 3 phrases maximum. -->
+```{r mfa_groups}
+
+```
+
+<!--% Interprétez le graphique ci-dessus en 2 phrases. -->
+
+<!--% Réalisez le graphique de la répartition des individus dans l'espace. -->
 
 ```{r mfa_individus}
 
 ```
 
-<!--% Interprétation du graphique ci-dessous. -->
-
+<!--% Interprétez le graphique ci-dessus en 2 phrases. -->
 
 # Discussion
 
 <!--% Sur base de la série de graphiques que vous venez de réaliser, synthétisez vos observations et discutez-les en maximum 5 phrases. -->
-
