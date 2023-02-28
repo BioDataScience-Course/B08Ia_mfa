@@ -12,7 +12,7 @@ SciViews::R("spatial", "explore")
 
 # Introduction
 
-Des scientifiques ont étudié 19 espèces d'oiseaux dans 23 régions des Alpes françaises. Des relevés de températures et de précipitations ont été réalisé également dans chaque station. La carte ci-dessous présente les régions étudiées.
+Des scientifiques ont étudié 19 espèces d'oiseaux dans 23 régions des Alpes françaises. Des relevés de températures et de précipitations ont été réalisés également dans chaque station. La carte ci-dessous présente les régions étudiées.
 
 <!--# Vous ne devez pas comprendre ce code... vous apprendrez à réaliser des cartes avec R dans le cours de Science des Données III l'an prochain). -->
 
