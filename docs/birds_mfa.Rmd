@@ -67,7 +67,7 @@ birds <- ___
 
 ```
 
-<!--% Réalisez votre AFM dans l'objet `aples_mfa` et résumez-le ensuite. -->
+<!--% Réalisez votre AFM dans l'objet `alpes_mfa` et résumez-le ensuite. -->
 
 ```{r mfa}
 
