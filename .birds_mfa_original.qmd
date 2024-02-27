@@ -1,0 +1,249 @@
+---
+title: "Analyse factorielle multiple sur des oiseaux"
+author: "___"
+date: "`r Sys.Date()`"
+format:
+  html:
+    code-fold: true
+    code-tools: true
+    toc: true
+editor: visual
+lang: fr
+editor_options: 
+  chunk_output_type: inline
+bibliography: references.bib
+---
+
+# Introduction et but
+
+Les massifs montagneux des Alpes françaises (**French alps**) offrent une diversité d'habitats pour les oiseaux, favorisant ainsi une grande variété d'espèces. La fréquentation humaine, variable selon le relief et l'accessibilité des lieux, joue un rôle important dans la répartition de ces espèces. En effet, les zones plus difficiles d'accès abritent souvent des oiseaux plus farouches qui ne supportent pas la proximité de l'homme.
+
+Afin de mieux comprendre la répartition des oiseaux dans cet environnement complexe, des scientifiques ont étudié 19 espèces dans 23 régions des Alpes françaises. Ils ont également relevé les températures et les précipitations dans chaque station pour déterminer l'influence des facteurs environnementaux sur la composition de la faune aviaire.
+
+L'objectif de cette étude est d'identifier les stations et/ou les espèces qui présentent des particularités par rapport aux autres.
+
+# Matériel et méthodes
+
+Le jeu de données est issu du package {ade4} (jeu de données `atlas`) et provient de l'ouvrage de @lebreton1977.
+
+L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particulier le package {exploreit} version `r packageVersion("exploreit")` dans la [SciViews Box 2023](https://www.sciviews.org/software/svbox/). [Saturn Cloud](https://saturncloud.io/) (Linux Ubuntu 22.04) est utilisé pour exécuter le code et compiler ce bloc-notes.
+
+# Résultats
+
+```{r setup, include=FALSE}
+# Ceci est nécessaire pour les tests SDD, ne pas utiliser dans un "vrai" projet
+if (!"tools:tests" %in% search())
+  source(here::here("tests/tools_tests.R"), attach(NULL, name = "tools:tests"))
+
+# Configuration de l'environnement SciViews::R
+SciViews::R("___", lang = "fr")
+```
+
+## Description des données météorologiques
+
+Les températures minimales et maximales en janvier et en juillet, ainsi que les précipitations en millimètres pour ces deux mois et sur l'ensemble de l'année sont recensés. Ces données sont collectées et analysées dans les 23 stations étudiées.
+
+<!--% Importez le jeu de données `meteo` se trouvant dans le dossier `data/` sous le nom de `alps_meteo.csv`. Décrivez-les avec skimr::skim(). -->
+
+```{r importmeteo, record='RODFS', object='meteo'}
+meteo <- ___
+___
+```
+
+<!--% Proposez une matrice de nuages de points pour visualiser la relation entre les variables quantitatives d'intérêt à l'aide de la fonction ggscatmat() du package GGally. Le triangle supérieur de la matrice affichera les corrélations de Pearson par défaut, ce qui vous permettra d'évaluer la linéarité entre les variables. -->
+
+```{r scatmat, record='RNP', arg='labels'}
+___
+```
+
+<!--% Interprétez vos tableaux et votre graphique ci-dessous. -->
+
+```{r descmeteocomment, output='asis'}
+select_answer("
+[] -  Ce tableau ne contient aucune valeur manquante.
+[] -  Certaines valeurs sont manquantes dans ce tableau.
+[] -  Nous recensons 23 valeurs manquantes dans ce tableau.
+
+[] -  Ce tableau inclut uniquement des variables numériques, réparties en deux ensembles : l’un pour les variables de température et l’autre pour les variables de précipitations.
+[] -  Le tableau comporte une colonne relative aux stations, ainsi que deux ensembles de variables : l’un pour les variables de température et l’autre pour les variables de précipitations.
+
+[] -  Les valeurs médianes sont similaires entre les variables numériques.
+[] -  Les valeurs médianes diffèrent considérablement entre les variables numériques.
+
+[] -  Les coefficients de corrélation de Pearson entre les variables quantitatives sont très faibles.
+[] -  Les coefficients de corrélation de Pearson sont élevés entre les variables de température et entre les variables de précipitations.
+[] - Les coefficients de corrélation de Pearson entre les variables quantitatives sont très élevés.
+")
+```
+
+## Description des recensements des oiseaux
+
+Le tableau et le graphique ci-dessous illustrent les données récoltées lors de l'observation de 19 espèces d'oiseaux dans 23 stations distinctes. Les niveaux d'abondance observés ont été regroupés en 4 catégories :
+
+-   0 : Absent
+-   1 : Rare
+-   2 : Abondant
+-   3 : Très abondant
+
+<!--% Importez le jeu de données `birds` se trouvant dans le dossier `data/` sous le nom de `alps_birds.csv`. Décrivez-les avec skimr::skim(). -->
+
+```{r importbirds, record='RODFS', object='birds'}
+birds <- ___
+___
+```
+
+<!--% Visualisez ces données sur un graphique de type raster en utilisant geom_raster(). Les labels a proposer sont les suivants Espèce, Station, Abondance. -->
+
+```{r raster, record='RNP', arg='labels'}
+birds %>.%
+  smutate(., station = 1:nrow(birds)) %>.%
+  spivot_longer(., ___, 
+    names_to = "species", values_to = "n") %>.%
+  chart(___) +
+    ___() +
+    labs(___)
+```
+
+<!--# Comme ce graphique est identique à celui traité dans le module précédent, l’interprétation est déjà réalisée pour vous.. -->
+
+Dans notre jeu de données, nous avons 19 variables qualitatives ordonnées. Ce jeu de données est complet, sans aucune valeur manquante. De plus, les données sont déjà encodées de manière appropriée, ce qui signifie qu'elles ne nécessitent pas de transformation supplémentaire. En examinant les stations, nous constatons que les stations 15 à 23 ont tendance à accueillir davantage d'oiseaux. Parmi les espèces, la fauvette mélanocéphale est la moins abondante.
+
+## Ordination
+
+<!--% Fusionnez les deux tableaux `meteo` et `birds` en un seul tableau nommé `alps`. Transformez ensuite la colonne station en noms de ligne en utilisant la fonction column_to_rownames().-->
+
+```{r bind, record='RODFS', object='alps'}
+# fusion
+alps <- ___
+# rownames
+alps <- ___
+```
+
+<!--% Effectuez une analyse factorielle multiple (AFM) sur le tableau alps et stockez l'objet résultant dans la variable `alps_mfa`. Ensuite, affichez le résumé de l'objet alps_mfa. Lors de l'analyse, traitez les variables de dénombrement comme des variables destinées à l'analyse de fréquence. -->
+
+```{r mfa, record='ROP', object='alps_mfa'}
+alps_mfa <- ___
+___
+```
+
+<!--% Réalisez le graphique des éboulis de votre AFM avec données mixtes. -->
+
+```{r screemfa, record='RNP', arg='labels'}
+
+```
+
+<!--% Interprétez le résumé de l'AF et de son graphique des éboulis. -->
+
+```{r screemfacomment, output='asis'}
+select_answer(r"-{
+[] -   Le premier axe de l'AFM représente la quasi totalité de la variance. Il y a un effet saturant marqué.
+[] -   Le premier axe de l'AFM reprend un peu plus de la moitié de la variance.
+  
+[] -   Le second axe de l'AFM couvre 0.566 % la variance.
+[] -   Le second axe de l'AFM couvre 16 % la variance.
+[] -   Le second axe de l'AFM couvre 64 % de la variance.
+
+[] -   Le premier plan de l'AFC couvre presque les 7/10 de la variance totale, mais cela est totalement insuffisant.
+[] -   Le premier plan de l'AFM couvre presque les 7/10 de la variance totale, ce qui est parfait pour notre analyse.
+[] -   Le premier plan de l'AFC couvre presque les 7/10 de la variance totale, et nous nous en contenterons.
+}-")
+```
+
+<!--% Créez un graphique représentant la répartition des variables dans l'espace du premier plan de l'analyse factorielle multiple (AFM). -->
+
+```{r loadingsmfa, record='RNP', arg='labels'}
+
+```
+
+<!--% Interprétez le graphique représentant la répartition des variables dans l'espace. -->
+
+```{r loadingsmfacomment, output='asis'}
+select_answer(r"-{
+[] -  Toutes les variables sont bien représentées dans le plan de l’AFM. Cela est indiqué par la longueur élevée des vecteurs.
+[] -  Toutes les variables sont mal représentées dans le plan de l’AFM. Cela est indiqué par la longueur élevée des vecteurs.
+  
+[] -  Les précipitations en janvier sont corrélées avec les précipitations en juillet.
+[] -  Les précipitations en janvier ne sont pas corrélées avec les précipitations en juillet.
+[] -  Les précipitations en janvier sont inversément corrélées avec les précipitations en juillet.
+
+[] - Les maximums de températures sont fortement corrélés avec le premier axe de l’AFM.
+[] -  Les maximums de températures sont fortement corrélés avec le second axe de l’AFM.
+[] -  Les maximums de températures ne sont corrélés avec aucun des deux axes en particulier de l’AFM.
+  
+[] -  Globalement, les variables de températures sont inversément corrélées avec les variables de précipitations.
+[] -  Globalement, les variables de températures sont corrélées avec les variables de précipitations.
+[] -  Globalement, les variables de températures ne sont pas corrélées avec les variables de précipitations.
+}-")
+```
+
+<!--% Créez un graphique représentant la répartition des axes dans l'espace du premier plan de l'analyse factorielle multiple (AFM). -->
+
+```{r axesmfa, record='RNP', arg='labels'}
+
+```
+
+<!--% Créez un graphique représentant la répartition des groupes dans l'espace du premier plan de l'analyse factorielle multiple (AFM). -->
+
+```{r groupsmfa, record='RNP', arg='labels'}
+
+```
+
+<!--% Interprétez le graphique représentant la répartition des groupes et des axes dans l'espace. -->
+
+```{r groupsmfacomment, output='asis'}
+select_answer(r"-{
+[] - Les premiers axes des deux groupes sont corrélés avec le premier axe de l'AFM.
+[] - Les premiers axes des deux groupes sont corrélés avec le second axe de l'AFM.
+
+[] - Les seconds axes des deux groupes sont corrélés avec le premier axe de l'AFM.
+[] - Les premiers axes des deux groupes sont corrélés avec le second axe de l'AFM.
+
+[] -  Le groupe associé aux dénombrements d’oiseaux structure globalement le premier axe de l’AFM.
+[] -  Le groupe associé aux dénombrements d’oiseaux structure globalement le premier axe de l’AFM
+
+[] -  Le groupe associé aux variables environnementales structure globalement le premier axe de l’AFM.
+[] -  Le groupe associé aux variables environnementales structure globalement le premier axe de l’AFM.
+}-")
+```
+
+<!--% Créez un graphique représentant la répartition des stations et des espèces dans l'espace du premier plan de l'analyse factorielle multiple (AFM). -->
+
+```{r contingencymfa, fig.width=10, record='RNP', arg='labels'}
+
+```
+
+<!--% Interprétez le graphique représentant les stations et les espèces dans le premier plan de l'AFM. -->
+
+```{r contingencymfacomment, output='asis'}
+select_answer(r"-{
+[] -  Les stations sont très dispersées.
+[] -  Les stations sont parfaitement regroupées.
+[] -  Les stations sont regroupées en 4 groupes. Le premier groupe est composé de la station 7. On retrouve un second groupe avec la station 16 et 22. Le dernier groupe reprend tous les autres
+[] -  Les stations sont regroupées en 4 groupes. Le premier groupe est composé de la station 7. On retrouve un second groupe avec les stations 16 et 22. Un troisième groupe avec les stations de 1 à 8 moins la 7. Un quatrième groupe avec les stations 9 à 23 moins la 16 et la 22.
+
+[] -  Toutes les espèces d'oiseaux sont regroupées.
+[] -  Toutes les espèces d'oiseaux sont dispersées.
+[] -  Plusieurs espèces d'oiseaux sont bien regroupées mais trois fauvettes se détachent nettement.
+
+[] -   Les fauvettes mélanocéphale et pitchou (et dans une moindre mesure la fauvette passerinette) tirent les données à droite et sont abondantes dans les stations 16, 22.
+[] -   Les fauvettes mélanocéphale et pitchou (et dans une moindre mesure la fauvette passerinette) tirent les données à droite extrémité par leur absence de la quasi-totalité des stations.
+  
+[] -   Les stations 16, 22 sont caractérisées par les trois fauvettes citées ci-dessus.
+[] -   Les stations 16, 22 sont caractérisées par la présence importante, entre autres, des fauvettes orphee et passerinette et du hibou petit duc.
+[] -   Les stations 16 et 22 sont caractérisées par la présence importante de la fauvette orphee et du hibou petit duc.
+
+[] -  La station 7 est marquée par des précipitations plus importantes que dans les autres stations.
+[] -  La station 7 est marquée par des précipitations plus faibles que dans les autres stations.  
+[] -  La station 7 est marquée par des température minimales et mximales plus marquées que dans les autres stations.
+}-")
+```
+
+# Discussion et conclusions
+
+<!--% En conclusion, l'AFM vous semble-t-elle être un outil adéquat pour atteindre l'objectif de ce travail ? Concluez en deux phrases. Est ce que l'AFM vous donne des résultats plus intéressant que l'AFC ? -->
+
+..Votre discussion ici...
+
+# Référence
+
+<!--% Ne rien indiquer ici. La référence bibliographique se placera automatiquement.-->
