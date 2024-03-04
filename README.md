@@ -1,19 +1,20 @@
 # Analyse factorielle multiple d'oiseaux alpins
 
-Ce projet nécessite d’avoir assimilé l’ensemble des notions du huitièmes modules du cours de science des données biologiques 2. Ce projet correspond au template <https://github.com/BioDataScience-Course/B08Ia_mfa>. Il est distribué sous licence [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+## Avant-propos
+
+Vous devez avoir assimilé l’ensemble des notions du module 8 du cours de science des données biologiques 2. Ce projet correspond au template <https://github.com/BioDataScience-Course/B08Ia_mfa>. Il est distribué sous licence [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ## Présentation des données
 
-Les jeux de données utilisés (alpes_birds.csv, alpes_meto.csv) proviennent du package **{ade4}** et sont initialement regroupés dans l'objet **`atlas`**. Ce package a la particularité de regrouper plusieurs tableaux de données sous la forme d'une liste. Une page d'aide globale est disponible pour l'ensemble des tableaux regroupés sous **atlas** (?ade4::atlas).
+Les jeux de données utilisés (`alps_birds.csv`, `alps_meto.csv`) proviennent du package {ade4} et sont initialement regroupés dans `atlas` sous forme d'une liste de tableaux. Le script `R/import.R` en extrait les dufférents tableaux nécessaires à vos analyses. Le travail a déjà été fait pour vous zet vos donné&es sont prêtes dans le dossier `data`. La page pour l'ensemble des données est accessible ici : `?ade4::atlas`.
 
 ## Objectifs
 
-Ce projet est individuel et cadré. Ce dernier permettra de démontrer que vous avez acquis les compétences suivantes :
+Ce projet, individuel et cadré, vous permettra de démontrer que vous avez acquis les compétences suivantes :
 
--   pouvoir mettre en œuvre et interpréter une analyse factorielle multiple
+-   réaliser une analyse factorielle multiple
+-   interpréter les résultats d'une analyse factorielle multiple
 
 ## Consignes
 
-Complétez le fichier `birds_mfa.qmd` pour réaliser et interpréter une analyse factorielle multiple (AFM).
-
-N'oubliez pas de réaliser un "Rendu" de vos documents en HTML à la fin pour vérifier que tout fonctionne bien, et utilisez les tests à disposition dans l'onglet "Construire" -\> bouton "Construire tout". Corrigez les erreurs éventuelles rencontrées à ce stade avant de clôturer votre travail. Vérifiez également que votre dernier commit a bien été pushé sur GitHub avant la deadline.
+Complétez le document Quarto `birds_mfa.qmd`. Faites un "Rendu" de ce document en HTML à la fin pour vérifier que tout fonctionne bien (à ce stade de votre formation, laisser des erreurs qui empêchent la compilation du document Quarto en HTML est considéré comme une erreur grave). Utilisez les tests à disposition dans l'onglet "Construire" -\> bouton "Construire tout" pour détecter vos erreurs. Vérifiez également que le dernier commit a bien été pushé sur GitHub avant la deadline.

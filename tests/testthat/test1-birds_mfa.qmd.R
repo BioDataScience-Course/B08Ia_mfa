@@ -1,4 +1,4 @@
-# Vérifications de birds_ca.qmd
+# Vérifications de birds_mfa.qmd
 birds <- parse_rmd("../../birds_mfa.qmd",
   allow_incomplete = TRUE, parse_yaml = TRUE)
 
@@ -22,7 +22,8 @@ test_that("Le bloc-notes birds_mfa est-il compilé en un fichier final HTML ?", 
 
 test_that("La structure du document birds_mfa est-elle conservée ?", {
   expect_true(all(c("Introduction et but", "Matériel et méthodes",
-    "Résultats", "Description des données météorologiques", "Description des recensements des oiseaux", "Ordination",
+    "Résultats", "Description des données météorologiques",
+    "Description des recensements des oiseaux", "Ordination",
     "Discussion et conclusions", "Référence")
     %in% (rmd_node_sections(birds) |> unlist() |> unique())))
   # Les sections (titres) attendues du bloc-notes birds_mfa ne sont pas toutes
@@ -98,7 +99,7 @@ test_that("Chunks 'scatmat', 'descmeteocomment' : description des données envir
   
   expect_true(is_identical_to_ref("descmeteocomment"))
   # L'interprétation des tableaux descriptifs des données et du graphique sont
-  # (partiellement) fausses dans le chunk 'descpcacomment'
+  # (partiellement) fausses dans le chunk 'descmeteocomment'
   # Vous devez cochez les phrases qui décrivent les données d'un 'x' entre les
   # crochets [] -> [x]. Ensuite, vous devez recompiler la version
   # HTML du bloc-notes (bouton 'Rendu') sans erreur pour réactualiser les
@@ -127,14 +128,14 @@ test_that("Chunks 'raster' : description des données", {
   # Le graphique produit par le chunk 'raster' n'est pas celui attendu.
   # Avez-vous bien ajouté la variable station à `birds` ?
   # Avez-vous pivoté les variables relatives aux oiseaux en tableau long en
-  # indiquant comme variable résultate 'species' et comme dénombrement 'n' ?
+  # indiquant comme variable résultat 'species' et comme dénombrement 'n' ?
   # Avez-vous réalisé un graphique chart de ce tableau long en utilisant un
   # geom_raster() ?
 })
 
 test_that("Chunks 'bind' : fusion de `meteo` et de `birds`", {
   expect_true(is_identical_to_ref("bind", "names"))
-  # Les colonnes dans le tableau `alps` importé ne sont pas celles attendues
+  # Les colonnes dans le tableau `alps` créé ne sont pas celles attendues
   # Votre tableau fusionné n'est pas correct. Est ce que la colonne station a
   # été dupliquée lors de la fusion ? Est ce que la colonne station a bien été
   # convertie en nom des lignes ?  Ce test échoue si vous n'avez pas bien rempli
@@ -179,7 +180,8 @@ test_that("Chunks 'mfa', 'screemfa', 'screemfacomment' : AFM, graphique des ébo
 test_that("Chunks 'loadingsmfa', 'loadingsmfacomment' : graphique des variables de l'AFM et interprétation", {
   expect_true(is_identical_to_ref("loadingsmfa"))
   # Le graphique des variables de votre AFM n'est pas celui attendu.
-  # Assurez-vous de bien utiliser `alps_mfa`
+  # Assurez-vous de bien utiliser `alps_mfa` et de choisir le bon type de
+  # graphique
   
   expect_true(is_identical_to_ref("loadingsmfacomment"))
   # L'interprétation du graphique des variables de l'AFM est (partiellement)
@@ -195,7 +197,8 @@ test_that("Chunks 'loadingsmfa', 'loadingsmfacomment' : graphique des variables 
 test_that("Chunks 'axesmfa', 'groupsmfa', 'groupsmfacomment' : graphique des axes et des groupes de l'AFM et commentaires", {
   expect_true(is_identical_to_ref("axesmfa"))
   # Le graphique des axes de votre AFM n'est pas celui attendu.
-  # Assurez-vous de bien utiliser `alps_mfa`
+  # Assurez-vous de bien utiliser `alps_mfa` et de réaliser le bon type de
+  # graphique
   
   expect_true(is_identical_to_ref("groupsmfa"))
   # Le graphique des groupes de votre AFM n'est pas celui attendu.
@@ -231,8 +234,8 @@ test_that("Chunks 'contingencymfa', 'contingencymfacomment' : Biplot de l'AFM et
 
 test_that("La partie discussion et conclusion est-elle remplie ?", {
   expect_true(!(rmd_select(birds, by_section("Discussion et conclusions")) |>
-      as_document() |> grepl("...Votre discussion ici...", x = _,
-        fixed = TRUE) |> any()))
+    as_document() |> grepl("...Votre discussion ici...", x = _,
+      fixed = TRUE) |> any()))
   # La discussion et les conclusions ne sont pas faites
   # Remplacez "...Votre discussion ici..." par vos phrases de commentaires
   # libres (à noter que le contenu de cette section n'est pas évalué

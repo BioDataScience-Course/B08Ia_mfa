@@ -1,30 +1,34 @@
 # Importation et remaniement des données
+# (ceci est déjà réalisé pour vous, vous ne devez pas exécuter ce script)
 
-# Importation des données brutes ------------------------------------------
-
+# Configuration de l'environnement
 SciViews::R
-
-# Le package ade4 ne propose pas de tableaux habituels, mais des listes de
-#  tableaux.
-data("atlas", package = "ade4")
-# page d'aide associée aux données
+# Le package {ade4} a des données dans des listes de tableaux
+atlas <- read("atlas", package = "ade4")
+# Page d'aide des données
 ?ade4::atlas
 
-# station -----------------------------------------------------------------
-station <- dtx(
-  station = attr(atlas$names.district, "names"),
-  name = atlas$names.district)
 
-write$csv(station, "data/alps_station.csv")
+# stations ----------------------------------------------------------------
+
+stations <- dtx(
+  station = attr(atlas$names.district, "names"),
+  name    = atlas$names.district)
+write$csv(stations, "data/alps_stations.csv")
+
 
 # birds -------------------------------------------------------------------
-birds <- atlas$birds
-birds$station <- station$station
 
+birds <- atlas$birds
+birds$station <- stations$station
 write$csv(birds, "data/alps_birds.csv")
 
-# meteo -------------------------------------------------------------------
-meteo <- atlas$meteo
-meteo$station <- station$station
 
+# meteo -------------------------------------------------------------------
+
+meteo <- atlas$meteo
+meteo$station <- stations$station
 write$csv(meteo, "data/alps_meteo.csv")
+
+# Nettoyage de l'environnement
+rm(atlas, stations, birds, meteo)
