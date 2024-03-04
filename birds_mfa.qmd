@@ -199,10 +199,10 @@ select_answer(r"-{
 [] -   Les seconds axes des deux groupes sont corrélés avec le second axe de l'AFM.
 
 [] -   Le groupe associé aux dénombrements d’oiseaux structure globalement le premier axe de l’AFM.
-[] -   Le groupe associé aux dénombrements d’oiseaux structure globalement le premier axe de l’AFM
+[] -   Le groupe associé aux dénombrements d’oiseaux structure globalement le second axe de l’AFM
 
 [] -   Le groupe associé aux variables environnementales structure globalement le premier axe de l’AFM.
-[] -   Le groupe associé aux variables environnementales structure globalement le premier axe de l’AFM.}-")
+[] -   Le groupe associé aux variables environnementales structure globalement le second axe de l’AFM.}-")
 ```
 
 <!--% Ordinez les stations et les espèces dans le premier plan de l'AFM. -->
