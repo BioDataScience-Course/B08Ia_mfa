@@ -24,7 +24,7 @@ L'objectif de cette étude est d'identifier les stations alpines et/ou les espè
 
 Le jeu de données est issu du package {ade4} (`atlas`). Ces données proviennent de l'ouvrage de @lebreton1977. La répartition de 19 espèces aviaires est étudiée dans 23 régions des Alpes françaises. Les températures et les précipitations dans chaque station sont également mesurées pour déterminer l'influence des facteurs environnementaux.
 
-L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particulier le package {exploreit} version `r packageVersion("exploreit")` dans la [SciViews Box 2023](https://www.sciviews.org/software/svbox/). [Saturn Cloud](https://saturncloud.io/) (Linux Ubuntu 22.04) est utilisé pour exécuter le code et compiler la version HTML de ce bloc-notes.
+L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particulier le package {exploreit} version `r packageVersion("exploreit")` dans la [SciViews Box 2024](https://www.sciviews.org/software/svbox/). [Saturn Cloud](https://saturncloud.io/) (Linux Ubuntu 22.04) est utilisé pour exécuter le code et compiler la version HTML de ce bloc-notes.
 
 # Résultats
 
@@ -111,7 +111,7 @@ birds %>.%
 
 ## Ordination
 
-<!--% Fusionnez les deux tableaux `meteo` et `birds` en un seul tableau nommé `alps`. Transformez ensuite la colonne station en noms de ligne en utilisant la fonction column_to_rownames().-->
+<!--% Fusionnez les deux tableaux `meteo` et `birds` en un seul tableau nommé `alps`. Transformez ensuite la colonne station en noms de ligne en utilisant la fonction `column_to_rownames()`.-->
 
 ```{r bind, record='RODFS', object='alps'}
 # Fusion des deux tableaux
@@ -120,7 +120,7 @@ alps <- ___
 alps <- ___
 ```
 
-<!--% Effectuez une analyse factorielle multiple (AFM) sur le `alps` et stockez l'objet résultant dans la variable `alps_mfa`. Ensuite, affichez le résumé de `alps_mfa`. Lors de l'analyse, traitez les variables de dénombrement comme des variables destinées à l'analyse de fréquence. -->
+<!--% Effectuez une analyse factorielle multiple (AFM) sur `alps` et stockez l'objet résultant dans la variable `alps_mfa`. Ensuite, affichez le résumé de `alps_mfa`. Lors de l'analyse, traitez les variables de dénombrement comme des variables destinées à l'analyse de fréquence. -->
 
 ```{r mfa, record='ROP', object='alps_mfa'}
 alps_mfa <- ___
