@@ -24,22 +24,35 @@ L'objectif de cette étude est d'identifier les stations alpines et/ou les espè
 
 Le jeu de données est issu du package {ade4} (`atlas`). Ces données proviennent de l'ouvrage de @lebreton1977. La répartition de 19 espèces aviaires est étudiée dans 23 régions des Alpes françaises. Les températures et les précipitations dans chaque station sont également mesurées pour déterminer l'influence des facteurs environnementaux.
 
-L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particulier le package {exploreit} version `r packageVersion("exploreit")` dans la [SciViews Box 2024](https://www.sciviews.org/software/svbox/). [Saturn Cloud](https://saturncloud.io/) (Linux Ubuntu 22.04) est utilisé pour exécuter le code et compiler la version HTML de ce bloc-notes.
-
-# Résultats
+L'analyse est réalisée avec le logiciel R (`r R.version.string`) et en particulier le package {exploreit} version `r packageVersion("exploreit")` dans la [SciViews Box 2025](https://www.sciviews.org/software/svbox/). [Saturn Cloud](https://saturncloud.io/) (Linux Ubuntu 22.04) est utilisé pour exécuter le code et compiler la version HTML de ce bloc-notes.
 
 ```{r setup, include=FALSE}
 # Ceci est nécessaire pour les tests SDD, ne pas utiliser dans un "vrai" projet
 if (!"tools:tests" %in% search())
   source(here::here("tests/tools_tests.R"), attach(NULL, name = "tools:tests"))
 
+# Configure Knitr pour utiliser AGG comme périphérique graphique
+knitr::opts_chunk$set(dev = "ragg_png")
+
 # Configuration de l'environnement SciViews::R
-SciViews::R(___, lang = "fr")
+SciViews::R("___", lang = "fr")
 ```
+
+<!--% Spécifiez si vous avez employé l'intelligence artificielle dans votre projet. -->
+
+```{r ai_comment, output='asis'}
+select_answer(r"-{
+[] -   Ce document a été rédigé en étant assisté par l'Intelligence Artificielle.
+[] -   Ce document a été rédigé sans recours à l'Intelligence Artificielle.}-")
+```
+
+<!-- Précisez ci-dessous l'utilisation que vous avez faite de l'IA. Citez le modèle utilisé. -->
+
+# Résultats
 
 ## Description des données météorologiques
 
-Les températures minimales et maximales en janvier et en juillet, ainsi que les précipitations en millimètres pour ces deux mois et sur l'ensemble de l'année sont recensés. Ces données sont collectées et analysées dans les 23 stations étudiées.
+Les températures minimales et maximales en janvier et en juillet, ainsi que les précipitations en millimètres pour ces deux mois et sur l'ensemble de l'année sont recensées. Ces données sont collectées et analysées dans les 23 stations étudiées.
 
 <!--% Importez le jeu de données `meteo` se trouvant dans le dossier `data` sous le nom de `alps_meteo.csv`. Décrivez-le à l'aide de skimr::skim(). -->
 
@@ -90,7 +103,7 @@ birds <- ___
 ___
 ```
 
-<!--% Visualisez ces données sur un graphique de type raster en utilisant geom_raster(). Remplacez les labels de stations par des nombres de 1 à 23 pour plus de lisibilité sur le graphique. -->
+<!--% Visualisez ces données sur un graphique de type raster en utilisant geom_raster(). Remplacez les labels de stations par des nombres de 1 à 23 pour plus de lisibilité sur le graphique. Les labels du graphiques sont "Abondance", "Espèce", "Station".-->
 
 ```{r raster, record='RNP', arg='labels'}
 birds %>.%
@@ -164,13 +177,13 @@ select_answer(r"-{
   
 [] -   Les précipitations en janvier sont corrélées avec les précipitations en juillet.
 [] -   Les précipitations en janvier ne sont pas corrélées avec les précipitations en juillet.
-[] -   Les précipitations en janvier sont inversément corrélées avec les précipitations en juillet.
+[] -   Les précipitations en janvier sont inversement corrélées avec les précipitations en juillet.
 
 [] -   Les maximums de températures sont fortement corrélés avec le premier axe de l’AFM.
 [] -   Les maximums de températures sont fortement corrélés avec le second axe de l’AFM.
-[] -   Les maximums de températures ne sont corrélés avec aucun des deux axes en particulier de l’AFM.
+[] -   Les maximums de températures ne sont corrélés avec aucun des deux axes, en particulier de l’AFM.
   
-[] -   Globalement, les variables de températures sont inversément corrélées avec les variables de précipitations.
+[] -   Globalement, les variables de températures sont inversement corrélées avec les variables de précipitations.
 [] -   Globalement, les variables de températures sont corrélées avec les variables de précipitations.
 [] -   Globalement, les variables de températures ne sont pas corrélées avec les variables de précipitations.
 }-")
@@ -199,7 +212,7 @@ select_answer(r"-{
 [] -   Les seconds axes des deux groupes sont corrélés avec le second axe de l'AFM.
 
 [] -   Le groupe associé aux dénombrements d’oiseaux structure globalement le premier axe de l’AFM.
-[] -   Le groupe associé aux dénombrements d’oiseaux structure globalement le second axe de l’AFM
+[] -   Le groupe associé aux dénombrements d’oiseaux structure globalement le second axe de l’AFM.
 
 [] -   Le groupe associé aux variables environnementales structure globalement le premier axe de l’AFM.
 [] -   Le groupe associé aux variables environnementales structure globalement le second axe de l’AFM.}-")
@@ -222,7 +235,7 @@ select_answer(r"-{
 
 [] -   Toutes les espèces d'oiseaux sont regroupées.
 [] -   Toutes les espèces d'oiseaux sont dispersées.
-[] -   Plusieurs espèces d'oiseaux sont bien regroupées mais trois fauvettes se détachent nettement.
+[] -   Plusieurs espèces d'oiseaux sont bien regroupées, mais trois fauvettes se détachent nettement.
 
 [] -   Les fauvettes mélanocéphale et pitchou (et dans une moindre mesure la fauvette passerinette) tirent les données à droite et sont abondantes dans les stations 16, 22.
 [] -   Les fauvettes mélanocéphale et pitchou (et dans une moindre mesure la fauvette passerinette) tirent les données à droite extrémité par leur absence de la quasi-totalité des stations.
@@ -233,14 +246,30 @@ select_answer(r"-{
 
 [] -  La station 7 est marquée par des précipitations plus importantes que dans les autres stations.
 [] -  La station 7 est marquée par des précipitations plus faibles que dans les autres stations.  
-[] -  La station 7 est marquée par des température minimales et maximales plus marquées que dans les autres stations.}-")
+[] -  La station 7 est marquée par des températures minimales et maximales plus marquées que dans les autres stations.}-")
 ```
 
 # Discussion et conclusions
 
-<!--% En conclusion, l'AFM vous semble-t-elle être un outil adéquat pour atteindre l'objectif de ce travail ? Concluez en deux phrases. Est ce que l'AFM vous donne des résultats plus intéressant que l'AFC (voir projet B07Ia_acp_afc) ? Pourquoi ? -->
+<!--% En conclusion, l'AFM vous semble-t-elle être un outil adéquat pour atteindre l'objectif de ce travail ? Concluez en deux phrases. Est ce que l'AFM vous donne des résultats plus intéressants que l'AFC (voir projet B07Ia_acp_afc) ? Pourquoi ? -->
 
-...Votre discussion ici...
+```{r conclumfa_comment, output='asis'}
+select_answer(r"-{
+[] -   Par rapport à l’AFC menée sur les seuls dénombrements, l’AFM intègre simultanément les dénombrements d’oiseaux et les variables météorologiques.
+[] -   Le premier plan de l’AFM (~70 % de variance) explique légèrement plus d’inertie que le premier plan de l’AFC (~65 %).
+
+[] -   En AFM et l'AFC permettent d'avoir les mêmes groupements parmi les stations. 
+[] -   En AFM, la station 7 se détache principalement par des précipitations plus élevées ; cet effet n’apparaissait pas dans l’AFC.
+[] -   Les stations 16 et 22 restent isolées dans les deux analyses.
+[] -   Les stations 16 et 22 sont regroupées avec les stations 9-23. 
+
+[] -   Tout comme dans l’AFC, la station 23 est associé aux stations 16 et 22.
+[] -   Contrairement à l’AFC, la station 23 rejoint le groupe des stations 9–23 (hors 16 et 22).
+
+[] -   L'AFM et l'AFC donnent les mêmes résultats. Il n'était pas utile de réaliser un AFM. 
+[] -   L’AFM ne fournit aucune information supplémentaire par rapport à l’AFC.
+[] -   Pour répondre à l’objectif (identifier stations et espèces particulières), l’AFM est adéquate et complète l’AFC en mettant en relation faune et climat.}-")
+```
 
 # Référence
 
