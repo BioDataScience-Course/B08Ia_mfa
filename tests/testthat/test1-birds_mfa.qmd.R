@@ -232,10 +232,10 @@ test_that("Chunks 'contingencymfa', 'contingencymfacomment' : Biplot de l'AFM et
   # cette aide plus tard dans le travail de groupe ou les interrogations !
 })
 
-test_that("Chunk 'conclu_comment' : discussion et conclusions", {
-  expect_true(is_identical_to_ref("conclu_comment"))
+test_that("Chunk 'conclumfa_comment' : discussion et conclusions", {
+  expect_true(is_identical_to_ref("conclumfa_comment"))
   # La discussion et les conclusions sont (partiellement)
-  # fausses dans le chunk 'conclu_comment'
+  # fausses dans le chunk 'conclumfa_comment'
   # Vous devez cochez les phrases qui décrivent les graphiques et la table d'un
   # 'x' entre les crochets [] -> [x]. Ensuite, vous devez recompiler la version
   # HTML du bloc-notes (bouton 'Rendu') sans erreur pour réactualiser les

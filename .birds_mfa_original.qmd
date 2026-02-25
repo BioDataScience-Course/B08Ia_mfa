@@ -263,7 +263,7 @@ select_answer(r"-{
 [] -   Les stations 16 et 22 restent isolées dans les deux analyses.
 [] -   Les stations 16 et 22 sont regroupées avec les stations 9-23. 
 
-[] -   Tout comme dans l’AFC, la station 23 est associé aux stations 16 et 22.
+[] -   Tout comme dans l’AFC, la station 23 est associée aux stations 16 et 22.
 [] -   Contrairement à l’AFC, la station 23 rejoint le groupe des stations 9–23 (hors 16 et 22).
 
 [] -   L'AFM et l'AFC donnent les mêmes résultats. Il n'était pas utile de réaliser un AFM. 

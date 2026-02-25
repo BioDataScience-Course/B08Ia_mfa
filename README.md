@@ -26,5 +26,4 @@ Un chatbot SciViews est également disponible dans RStudio (Saturn Cloud), via l
 
 ## Informations sur les données
 
-Les jeux de données utilisés (`alps_birds.csv`, `alps_meto.csv`) proviennent du package {ade4} et sont initialement regroupés dans `atlas` sous forme d'une liste de tableaux. Le script `R/import.R` en extrait les différents tableaux nécessaires à vos analyses. Le travail a déjà été fait pour vous et vos donné&es sont prêtes dans le dossier `data`. La page pour l'ensemble des données est accessible ici : `?ade4::atlas`.
-
+Les jeux de données utilisés (`alps_birds.csv`, `alps_meto.csv`) proviennent du package {ade4} et sont initialement regroupés dans `atlas` sous forme d'une liste de tableaux. Le script `R/import.R` en extrait les différents tableaux nécessaires à vos analyses. Le travail a déjà été fait pour vous et vos données sont prêtes dans le dossier `data`. La page pour l'ensemble des données est accessible ici : `?ade4::atlas`.

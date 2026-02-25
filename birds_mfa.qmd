@@ -50,15 +50,6 @@ select_answer(r"-{
 
 # Résultats
 
-```{r setup, include=FALSE}
-# Ceci est nécessaire pour les tests SDD, ne pas utiliser dans un "vrai" projet
-if (!"tools:tests" %in% search())
-  source(here::here("tests/tools_tests.R"), attach(NULL, name = "tools:tests"))
-
-# Configuration de l'environnement SciViews::R
-SciViews::R(___, lang = "fr")
-```
-
 ## Description des données météorologiques
 
 Les températures minimales et maximales en janvier et en juillet, ainsi que les précipitations en millimètres pour ces deux mois et sur l'ensemble de l'année sont recensées. Ces données sont collectées et analysées dans les 23 stations étudiées.
@@ -272,7 +263,7 @@ select_answer(r"-{
 [] -   Les stations 16 et 22 restent isolées dans les deux analyses.
 [] -   Les stations 16 et 22 sont regroupées avec les stations 9-23. 
 
-[] -   Tout comme dans l’AFC, la station 23 est associé aux stations 16 et 22.
+[] -   Tout comme dans l’AFC, la station 23 est associée aux stations 16 et 22.
 [] -   Contrairement à l’AFC, la station 23 rejoint le groupe des stations 9–23 (hors 16 et 22).
 
 [] -   L'AFM et l'AFC donnent les mêmes résultats. Il n'était pas utile de réaliser un AFM. 
